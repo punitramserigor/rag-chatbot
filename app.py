@@ -65,4 +65,4 @@ def delete_db():
         return jsonify({"error": "Missing required parameters"}), 400
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=8000)
