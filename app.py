@@ -65,4 +65,4 @@ def delete_db():
         return jsonify({"error": "Missing required parameters"}), 400
 
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0")
+    app.run()
