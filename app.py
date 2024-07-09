@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import langchain.document_loaders
-from model1 import RAG
+from model import RAG
 from dotenv import load_dotenv
 import langchain
 
