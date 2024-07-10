@@ -20,12 +20,12 @@ def load_db():
     file_extension = file_path.split(".")[-1]
     if file_path and session_id:
         if file_extension in supported_formats:
-            # try:
+            try:
                 rag_model = RAG(session_id=session_id)
                 rag_model.load_db(file_path)
                 return jsonify({"success": "Database loaded successfully"}), 200
-            # except Exception as e:
-            #     return jsonify({"error": str(e)}), 500
+            except Exception as e:
+                return jsonify({"error": str(e)}), 500
         else:
             return jsonify({"error": "Unsupported file type"}), 400
     else:
@@ -39,12 +39,12 @@ def doc_invoke():
     query = data.get("query")
 
     if session_id and query:
-        # try:
+        try:
             rag_model = RAG(session_id=session_id)
             answer = rag_model.invoke(query=query)
             return jsonify({"answer": answer}), 200
-        # except Exception as e:
-        #     return jsonify({"error": str(e)}), 500
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
     else:
         return jsonify({"error": "Missing required parameters"}), 400
 
