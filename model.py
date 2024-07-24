@@ -71,7 +71,7 @@ class RAG:
         )
 
     def load_conversation(self, file_path):
-        with open(file_path, 'r') as file:
+        with open(file_path, "r") as file:
             conversation = json.load(file)
             
         # Get the latest 10 messages
@@ -79,8 +79,8 @@ class RAG:
 
         formatted_output = []
         for message in latest_messages:
-            message_type = message['type']
-            content = message['data']['content']
+            message_type = message["type"]
+            content = message["data"]["content"]
             formatted_output.append(f"{message_type}: {content}")
         
         return "\n".join(formatted_output)
@@ -125,8 +125,12 @@ class RAG:
         retrieved_docs = retriever.invoke(query)
         conversation = self.load_conversation(self.memory_file)
         self.response = self.chain.invoke(
-            {"input_documents": retrieved_docs, "human_input": query, "chat_history":conversation},
-            return_only_outputs=True
+            {
+                "input_documents": retrieved_docs,
+                "human_input": query,
+                "chat_history": conversation,
+            },
+            return_only_outputs=True,
         )
         self.chat_memory.add_user_message(query)
         self.chat_memory.add_ai_message(self.response["output_text"])
